@@ -1,8 +1,13 @@
 package application.repository;
 
-import application.entity.OrderedItemsPK;
 import application.entity.OrderedItems;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface OrderRepository extends JpaRepository<OrderedItems, OrderedItemsPK> {
+import java.util.List;
+
+
+@Repository
+public interface OrderRepository extends JpaRepository<OrderedItems, Long> {
+    List<OrderedItems> findByOrders_OrderId(Long id);
 }

@@ -2,11 +2,13 @@ package application.rest.controller;
 
 import application.entity.OrderedItems;
 import application.repository.OrderRepository;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping(path = "/order")
 public class OrderController {
     private final OrderRepository orderRepository;
@@ -18,5 +20,12 @@ public class OrderController {
     @GetMapping("/all")
     public @ResponseBody List<OrderedItems> getAll() {
         return orderRepository.findAll();
+    }
+
+    @GetMapping("/{id}")
+    public String findById(@PathVariable Long id, Model model) {
+        List<OrderedItems> order = orderRepository.findByOrders_OrderId(id);
+        model.addAttribute("order", order);
+        return "order";
     }
 }

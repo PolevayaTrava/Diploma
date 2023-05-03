@@ -9,6 +9,7 @@ plugins {
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '17'
+compileJava.options.encoding = 'UTF-8'
 
 configurations {
     compileOnly {
@@ -27,6 +28,9 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-rest:3.0.5'
     implementation 'org.springframework.boot:spring-boot-starter-tomcat:3.0.5'
     implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf:3.0.5'
+    implementation 'org.springframework.boot:spring-boot-starter-validation:3.0.5'
+
     compileOnly 'org.projectlombok:lombok'
     developmentOnly 'org.springframework.boot:spring-boot-devtools'
     runtimeOnly 'com.h2database:h2'
@@ -37,4 +41,8 @@ dependencies {
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
 }
