@@ -21,7 +21,6 @@ public class OrderedItems implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "item_id")
-    @OnDelete(action = OnDeleteAction.NO_ACTION)
     private Items items;
 
     @Column

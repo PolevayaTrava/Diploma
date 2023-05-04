@@ -39,7 +39,7 @@
             <tbody>
             <tr th:each="order : ${orders}">
                 <td style="text-align: center"><a th:href="@{/order/{id}(id=${order.orderId})}" th:text="${order.orderId}"/></td>
-                <td style="text-align: center" th:text="${#dates.format(order.date, 'dd-MM-yyyy')}">Date</td>
+                <td style="text-align: center" th:text="${#temporals.format(order.date, 'dd-MM-yyyy')}">Date</td>
                 <td style="text-align: center" th:text="${order.status}">Status</td>
                 <td style="text-align: center" th:text="${order.customer.fullName}">Customer full name</td>
                 <td style="text-align: center" th:text="${order.manager.fullName}">Employee full name</td>
@@ -78,7 +78,7 @@
             <a th:href="@{'./filter/{filter}' (filter='Ready')}" class="list-group-item list-group-item-action">Готовые заказы</a>
         </div>
 
-        <form action="/logout" target="_blank">
+        <form action="/logout" target="_self">
             <br/>
             <div class="d-grid gap-2">
                 <button class="btn btn-outline-secondary btn-sm btn-block" type="submit">Выход</button>

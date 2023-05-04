@@ -2,15 +2,14 @@ package application.rest.controller;
 
 import application.repository.OrdersRepository;
 import application.entity.Orders;
-import org.aspectj.weaver.ast.Or;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
+import java.text.ParseException;
+import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequestMapping(path = "/orders")
@@ -18,11 +17,11 @@ public class OrdersController {
 
     private String sortDateMethod = "ASC";
     private String filterMethod = "ALL";
-    private Date getStartDate = new Date(01-01-2023);
-    private Date getEndDate = new Date(01-01-2030);
+    private LocalDate getStartDate = LocalDate.of(2023, 01, 01);
+    private LocalDate getEndDate = LocalDate.of(2030, 01, 01);
     private final OrdersRepository ordersRepository;
 
-    public OrdersController(OrdersRepository ordersRepository) {
+    public OrdersController(OrdersRepository ordersRepository) throws ParseException {
         this.ordersRepository = ordersRepository;
     }
 
@@ -53,8 +52,8 @@ public class OrdersController {
 
     @GetMapping("/date/{startDate}/{endDate}")
     public String findOrdersByDate(
-            @PathVariable @DateTimeFormat(pattern = "dd-MM-yyyy") Date startDate,
-            @PathVariable @DateTimeFormat(pattern = "dd-MM-yyyy") Date endDate) {
+            @PathVariable @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate startDate,
+            @PathVariable @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate endDate) {
         getStartDate = startDate;
         getEndDate = endDate;
         return "redirect:/orders/all";
@@ -79,7 +78,7 @@ public class OrdersController {
     }
 
     private List<Orders> filterAndSort() {
-        List<Orders> orders = ordersRepository.findOrdersByDateBetween(getStartDate, getEndDate);
+        List<Orders> orders = null;
         switch (filterMethod) {
             case "All":
                 switch (sortDateMethod) {

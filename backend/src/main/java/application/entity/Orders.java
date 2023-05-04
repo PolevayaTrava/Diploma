@@ -9,6 +9,7 @@ import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.data.annotation.CreatedDate;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -32,7 +33,8 @@ public class Orders implements Serializable {
 
     @CreatedDate
     @Column
-    private Date date;
+    private LocalDate date;
 
+    @Column
     private String status;
 }
