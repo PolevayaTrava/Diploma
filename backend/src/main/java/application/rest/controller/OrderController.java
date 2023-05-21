@@ -24,7 +24,7 @@ public class OrderController {
 
     @GetMapping("/{id}")
     public String findById(@PathVariable Long id, Model model) {
-        List<OrderedItems> order = orderRepository.findByOrders_OrderId(id);
+        OrderedItems order = orderRepository.findByOrders_OrderId(id);
         model.addAttribute("order", order);
         return "order";
     }

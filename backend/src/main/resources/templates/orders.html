@@ -65,8 +65,8 @@
 
         <form th:href="@{./date/{startDate}/{endDate}}" th:object="${orders}" name="inputDate" id="inputDate" method="get">
         <div class="input-group mb-3">
-            <input type="date" class="form-control" id="startDate" th:field="*{date}" min="01-01-2023" max="01-01-2030">
-            <input type="date" class="form-control" id="endDate" th:field="*{date}" min="01-01-2023" max="01-01-2030">
+            <input type="date" class="form-control" id="startDate" th:name="startDate" min="01-01-2023" max="01-01-2030">
+            <input type="date" class="form-control" id="endDate" th:name="endDate" min="01-01-2023" max="01-01-2030">
             <button class="btn btn-outline-secondary btn-sm btn-block" type="submit">Найти заказы</button>
         </div>
         </form>

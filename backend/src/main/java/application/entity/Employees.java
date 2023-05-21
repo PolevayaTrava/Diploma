@@ -1,5 +1,6 @@
 package application.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -32,6 +33,6 @@ public class Employees implements Serializable {
             joinColumns = {@JoinColumn(name = "employee_id", referencedColumnName = "employeeId")},
             inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "roleId")}
     )
-    @JsonManagedReference
+    @JsonIgnoreProperties("employees")
     private List<Role> roles;
 }

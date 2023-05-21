@@ -25,6 +25,8 @@ public interface OrdersRepository extends JpaRepository<Orders, Long> {
 
     List<Orders> findByCustomer_FullName(String fullName);
 
+    Orders findByOrderId(Long id);
+
     //List<Orders> findByCustomer_FullNameOrderByDateAsc(String fullName);
 
     //List<Orders> findByCustomer_FullNameOrderByDateDesc(String fullName);

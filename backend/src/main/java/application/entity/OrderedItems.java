@@ -25,4 +25,7 @@ public class OrderedItems implements Serializable {
 
     @Column
     private Integer count;
+
+    @Column
+    private Integer countFact;
 }

@@ -1,6 +1,7 @@
 package application.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -18,6 +19,6 @@ public class Role implements Serializable {
     private String role;
 
     @ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
-    @JsonBackReference
+    @JsonIgnoreProperties("roles")
     private List<Employees> employees;
 }
