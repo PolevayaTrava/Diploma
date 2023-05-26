@@ -1,18 +1,31 @@
 package application.rest.controller;
 
+import application.PDFExporter;
 import application.entity.OrderedItems;
 import application.repository.OrderRepository;
+import application.service.impl.OrderServiceImpl;
+import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+
+import static com.lowagie.text.pdf.BaseFont.WINANSI;
 
 @Controller
 @RequestMapping(path = "/order")
 public class OrderController {
     private final OrderRepository orderRepository;
 
+    @Autowired
+    private OrderServiceImpl orderService;
     public OrderController(OrderRepository orderRepository) {
         this.orderRepository = orderRepository;
     }
@@ -24,8 +37,24 @@ public class OrderController {
 
     @GetMapping("/{id}")
     public String findById(@PathVariable Long id, Model model) {
-        OrderedItems order = orderRepository.findByOrders_OrderId(id);
+        List<OrderedItems> order = orderRepository.findAllByOrders_OrderId(id);
         model.addAttribute("order", order);
         return "order";
+    }
+
+    @GetMapping("/printOrder/{id}")
+    public void printOrder(@PathVariable Long id, HttpServletResponse response) throws IOException {
+        DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
+        String currentDateTime = dateFormatter.format(new Date());
+        response.setContentType("application/pdf");
+
+        String headerKey = "Content-Disposition";
+        String headerValue = "attachment; filename=Zakaz_" + id + "_" + currentDateTime + ".pdf";
+        response.setHeader(headerKey, headerValue);
+
+        List<OrderedItems> order = orderService.findAllById(id);
+
+        PDFExporter exporter = new PDFExporter(order);
+        exporter.export(response, id);
     }
 }

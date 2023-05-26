@@ -11,15 +11,15 @@ import java.util.List;
 public interface OrdersRepository extends JpaRepository<Orders, Long> {
     //List<Orders> findOrdersByDateBetween(LocalDate startDate, LocalDate endDate);
 
-    //List<Orders> findAllByDateBetweenOrderByDateAsc(LocalDate startDate, LocalDate endDate);
+    List<Orders> findAllByDateBetweenOrderByDateAsc(LocalDate startDate, LocalDate endDate);
 
-    //List<Orders> findOrdersByCustomer_FullName(String fullName);
-
-    List<Orders> findByStatusOrderByDateAsc(String status);
+    List<Orders> findOrdersByCustomer_FullName(String fullName);
 
     List<Orders> findAllByOrderByDateAsc();
 
     List<Orders> findAllByOrderByDateDesc();
+
+    List<Orders> findByStatusOrderByDateAsc(String status);
 
     List<Orders> findByStatusOrderByDateDesc(String status);
 

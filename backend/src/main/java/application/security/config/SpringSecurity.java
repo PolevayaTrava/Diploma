@@ -44,9 +44,10 @@ public class SpringSecurity {
                                 .requestMatchers("/orders/**").permitAll()
                                 .requestMatchers("/items/**").permitAll()
                                 .requestMatchers("/order/**").permitAll()
-                                .requestMatchers("/rest/**").hasRole("ROLE_PICKER")
-                                .requestMatchers("/rest/order/**").hasRole("ROLE_PICKER")
-                                .requestMatchers("/rest/orders/**").hasRole("ROLE_PICKER")
+                                .requestMatchers("/order/printOrder/**").permitAll()
+                                .requestMatchers("/rest/**").permitAll()
+                                .requestMatchers("/rest/order/**").permitAll()
+                                .requestMatchers("/rest/orders/**").permitAll()
                 ).formLogin(
                         form -> form
                                 .loginPage("/login")

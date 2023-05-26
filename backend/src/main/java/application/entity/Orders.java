@@ -36,8 +36,6 @@ public class Orders implements Serializable {
     @ManyToOne(fetch = FetchType.EAGER)
     private Employees picker;
 
-    /*@JsonDeserialize(using = LocalDateTimeDeserializer.class)
-    @JsonSerialize(using = LocalDateTimeSerializer.class)*/
     @Column
     private LocalDate date;
 

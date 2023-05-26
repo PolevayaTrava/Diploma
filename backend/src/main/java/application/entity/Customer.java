@@ -19,5 +19,8 @@ public class Customer implements Serializable {
     private String address;
 
     @Column
+    private String email;
+
+    @Column
     private String phone;
 }

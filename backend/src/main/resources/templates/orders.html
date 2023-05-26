@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Заказы</title>
@@ -54,19 +54,19 @@
 
     <div class="col-6 col-md-3">
         <br/>
-        <form th:href="@{./name/{fullName}}" name="inputFullName" id="inputFullName" method="get">
+        <form th:href="@{./name/{fullName}}" th:object="${customer}" name="inputFullName" id="inputFullName" method="get">
         <div class="input-group mb-3">
-            <input type="text" class="form-control" id="fullName" th:name="fullName" placeholder="Найти заказ" aria-label="Найти заказ" aria-describedby="search">
+            <input type="text" class="form-control" id="fullName" th:name="fullName" th:field="*{fullName}" placeholder="Найти заказ" aria-label="Найти заказ" aria-describedby="search">
             <div class="input-group-append">
                 <button class="btn btn-outline-secondary" type="submit">🔍</button>
             </div>
         </div>
         </form>
 
-        <form th:href="@{./date/{startDate}/{endDate}}" th:object="${orders}" name="inputDate" id="inputDate" method="get">
+        <form th:href="@{./date/{startDate}/{endDate}}" th:object="${orders2}" name="inputDate" id="inputDate" method="get">
         <div class="input-group mb-3">
-            <input type="date" class="form-control" id="startDate" th:name="startDate" min="01-01-2023" max="01-01-2030">
-            <input type="date" class="form-control" id="endDate" th:name="endDate" min="01-01-2023" max="01-01-2030">
+            <input type="date" class="form-control" id="startDate" th:name="startDate" th:field="*{date}" min="01-01-2023" max="01-01-2030">
+            <input type="date" class="form-control" id="endDate" th:name="endDate" th:field="*{date}" min="01-01-2023" max="01-01-2030">
             <button class="btn btn-outline-secondary btn-sm btn-block" type="submit">Найти заказы</button>
         </div>
         </form>

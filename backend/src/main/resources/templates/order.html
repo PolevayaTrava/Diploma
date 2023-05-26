@@ -38,9 +38,10 @@
 
         <div class="col-2 col-sm-6 col-md-2">
             <br/>
-            <form action="http://localhost:8080/orders/all" target="_self">
-                <button class="btn btn-outline-secondary btn-sm btn-block" type="submit">Назад</button>
-            </form>
+            <div class="list-group">
+                <a th:href="@{./printOrder/{id}(id=${order[0].orders.orderId})}" target="_blank" class="list-group-item list-group-item-action">Печать заказа</a>
+                <a th:href="@{/orders/all}" class="list-group-item list-group-item-action">Назад</a>
+            </div>
         </div>
     </div>
 </div>

@@ -1,5 +1,6 @@
 package application.rest.controller;
 
+import application.entity.Customer;
 import application.repository.OrdersRepository;
 import application.entity.Orders;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -21,14 +22,14 @@ public class OrdersController {
     private LocalDate getEndDate = LocalDate.of(2030, 01, 01);
     private final OrdersRepository ordersRepository;
 
-    public OrdersController(OrdersRepository ordersRepository) throws ParseException {
+    public OrdersController(OrdersRepository ordersRepository) {
         this.ordersRepository = ordersRepository;
     }
 
     @GetMapping("/all")
-    public String getAll(Model model) {
-        List<Orders> orders = filterAndSort();
-        model.addAttribute("orders", orders);
+    public String getAll(@ModelAttribute("customer") Customer customer, @ModelAttribute("orders2") Orders orders, Model model) {
+        List<Orders> ordersList = filterAndSort();
+        model.addAttribute("orders", ordersList);
         model.addAttribute("sort", sortDateMethod);
         model.addAttribute("filter", filterMethod);
         model.addAttribute("startDate", getStartDate);
@@ -105,6 +106,12 @@ public class OrdersController {
                 };
                 break;
         }
+        return orders;
+    }
+
+    private List<Orders> filterByDate() {
+        List<Orders> orders = null;
+        orders = ordersRepository.findAllByDateBetweenOrderByDateAsc(getStartDate, getEndDate);
         return orders;
     }
 }
