@@ -42,6 +42,7 @@ public class SpringSecurity {
                                 .requestMatchers("/users/**").permitAll()
                                 .requestMatchers("/login/**").permitAll()
                                 .requestMatchers("/orders/**").permitAll()
+                                .requestMatchers("/orders/fullName/**").permitAll()
                                 .requestMatchers("/items/**").permitAll()
                                 .requestMatchers("/order/**").permitAll()
                                 .requestMatchers("/order/printOrder/**").permitAll()

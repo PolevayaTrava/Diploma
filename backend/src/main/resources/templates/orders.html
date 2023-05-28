@@ -54,22 +54,6 @@
 
     <div class="col-6 col-md-3">
         <br/>
-        <form th:href="@{./name/{fullName}}" th:object="${customer}" name="inputFullName" id="inputFullName" method="get">
-        <div class="input-group mb-3">
-            <input type="text" class="form-control" id="fullName" th:name="fullName" th:field="*{fullName}" placeholder="Найти заказ" aria-label="Найти заказ" aria-describedby="search">
-            <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="submit">🔍</button>
-            </div>
-        </div>
-        </form>
-
-        <form th:href="@{./date/{startDate}/{endDate}}" th:object="${orders2}" name="inputDate" id="inputDate" method="get">
-        <div class="input-group mb-3">
-            <input type="date" class="form-control" id="startDate" th:name="startDate" th:field="*{date}" min="01-01-2023" max="01-01-2030">
-            <input type="date" class="form-control" id="endDate" th:name="endDate" th:field="*{date}" min="01-01-2023" max="01-01-2030">
-            <button class="btn btn-outline-secondary btn-sm btn-block" type="submit">Найти заказы</button>
-        </div>
-        </form>
 
         <div class="list-group">
             <a th:href="@{'./filter/{filter}' (filter='All')}" class="list-group-item list-group-item-action">Все заказы</a>

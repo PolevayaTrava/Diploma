@@ -3,6 +3,7 @@ package application.rest.controller;
 import application.entity.Customer;
 import application.repository.OrdersRepository;
 import application.entity.Orders;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,8 +19,6 @@ public class OrdersController {
 
     private String sortDateMethod = "ASC";
     private String filterMethod = "ALL";
-    private LocalDate getStartDate = LocalDate.of(2023, 01, 01);
-    private LocalDate getEndDate = LocalDate.of(2030, 01, 01);
     private final OrdersRepository ordersRepository;
 
     public OrdersController(OrdersRepository ordersRepository) {
@@ -27,13 +26,12 @@ public class OrdersController {
     }
 
     @GetMapping("/all")
-    public String getAll(@ModelAttribute("customer") Customer customer, @ModelAttribute("orders2") Orders orders, Model model) {
+    public String getAll(Model model) {
         List<Orders> ordersList = filterAndSort();
         model.addAttribute("orders", ordersList);
         model.addAttribute("sort", sortDateMethod);
         model.addAttribute("filter", filterMethod);
-        model.addAttribute("startDate", getStartDate);
-        model.addAttribute("endDate", getEndDate);
+
         return "orders";
     }
 
@@ -42,22 +40,6 @@ public class OrdersController {
         ordersRepository.findById(id).ifPresent(orders ->
                 model.addAttribute("orders", orders));
         return "orders";
-    }
-
-    @GetMapping("/name/{fullName}")
-    public String getByName(@PathVariable String fullName, Model model) {
-        List<Orders> orders = ordersRepository.findByCustomer_FullName(fullName);
-        model.addAttribute("orders", orders);
-        return "orders";
-    }
-
-    @GetMapping("/date/{startDate}/{endDate}")
-    public String findOrdersByDate(
-            @PathVariable @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate startDate,
-            @PathVariable @DateTimeFormat(pattern = "dd-MM-yyyy") LocalDate endDate) {
-        getStartDate = startDate;
-        getEndDate = endDate;
-        return "redirect:/orders/all";
     }
 
     @GetMapping("/sort/{sortDate}")
@@ -106,12 +88,6 @@ public class OrdersController {
                 };
                 break;
         }
-        return orders;
-    }
-
-    private List<Orders> filterByDate() {
-        List<Orders> orders = null;
-        orders = ordersRepository.findAllByDateBetweenOrderByDateAsc(getStartDate, getEndDate);
         return orders;
     }
 }

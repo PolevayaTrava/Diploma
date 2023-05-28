@@ -11,23 +11,19 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
-import static com.lowagie.text.pdf.BaseFont.WINANSI;
-
 @Controller
 @RequestMapping(path = "/order")
 public class OrderController {
     private final OrderRepository orderRepository;
-
-    @Autowired
-    private OrderServiceImpl orderService;
-    public OrderController(OrderRepository orderRepository) {
+    private final OrderServiceImpl orderService;
+    public OrderController(OrderRepository orderRepository, OrderServiceImpl orderService) {
         this.orderRepository = orderRepository;
+        this.orderService = orderService;
     }
 
     @GetMapping("/all")
