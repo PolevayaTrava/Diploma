@@ -56,14 +56,14 @@ public class OrdersRestController {
         properties.put("mail.smtp.auth", "true");
         properties.put("mail.smtp.ssl.enable", "true");
         properties.put("mail.transport.protocol", "smtp");
-        properties.put("mail.user", "skaldas01@mail.ru");
-        properties.put("mail.password", "LwEh23HckxSDzDUncgd3");
+        properties.put("mail.user", "login");
+        properties.put("mail.password", "password");
 
 
         Session session = Session.getDefaultInstance(properties, new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("skaldas01@mail.ru", "LwEh23HckxSDzDUncgd3");
+                return new PasswordAuthentication("login", "password");
             }
         });
 
