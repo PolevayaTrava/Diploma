@@ -1,16 +1,11 @@
 package application.rest.controller;
 
-import application.entity.Customer;
 import application.repository.OrdersRepository;
 import application.entity.Orders;
-import org.aspectj.weaver.ast.Or;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.text.ParseException;
-import java.time.LocalDate;
 import java.util.List;
 
 @Controller

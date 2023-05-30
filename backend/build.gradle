@@ -14,6 +14,10 @@ configurations {
         extendsFrom annotationProcessor
     }
 }
+jar {
+    archiveBaseName = 'diploma'
+    archiveVersion =  '0.1.0'
+}
 
 repositories {
     mavenCentral()

@@ -19,8 +19,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Getter
-@Setter
+@Data
 public class Orders implements Serializable {
 
     @Id

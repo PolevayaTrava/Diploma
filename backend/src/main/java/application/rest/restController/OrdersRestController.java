@@ -45,7 +45,7 @@ public class OrdersRestController {
     public void sendEmail(Long id) {
         Orders orders = ordersRepository.findByOrderId(id);
         String to = orders.getCustomer().getEmail();
-        String from = "skaldas01@mail.ru";
+        String from = "email";
         String address = orders.getCustomer().getAddress();
         String fullName = orders.getCustomer().getFullName();
         String orderId = orders.getOrderId().toString();
@@ -56,14 +56,14 @@ public class OrdersRestController {
         properties.put("mail.smtp.auth", "true");
         properties.put("mail.smtp.ssl.enable", "true");
         properties.put("mail.transport.protocol", "smtp");
-        properties.put("mail.user", "login");
+        properties.put("mail.user", "email");
         properties.put("mail.password", "password");
 
 
         Session session = Session.getDefaultInstance(properties, new Authenticator() {
             @Override
             protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication("login", "password");
+                return new PasswordAuthentication("email", "password");
             }
         });
 
